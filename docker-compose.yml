@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  semaphore:
+    image: semaphoreui/semaphore:v2.12.3
+    container_name: semaphore-local
+    ports:
+      - "3000:3000"
+    environment:
+      SEMAPHORE_DB_DIALECT: bolt
+      SEMAPHORE_ADMIN: admin
+      SEMAPHORE_ADMIN_PASSWORD: admin
+      SEMAPHORE_ADMIN_NAME: Admin
+      SEMAPHORE_ADMIN_EMAIL: admin@localhost
+      SEMAPHORE_ACCESS_KEY_ENCRYPTION: gs72/V5/L9P1vW2qZk0/wA==
+    volumes:
+      - ./playbook:/home/semaphore/playbook
+      - ./inventory:/home/semaphore/inventory
+      - semaphore_data:/tmp/semaphore
+    restart: unless-stopped
+
+volumes:
+  semaphore_data:
