@@ -1,0 +1,13 @@
+---
+- name: Get currently logged in user on Windows machine
+  hosts: host
+  tasks:
+    - name: Get the currently logged in user
+      win_shell: |
+        (Get-WmiObject -Class Win32_ComputerSystem).UserName
+      register: logged_in_user
+
+    - name: Show the logged-in user
+      debug:
+        msg: "Logged in user: {{ logged_in_user.stdout }}"
+

@@ -1,0 +1,19 @@
+<Configuration ID="5a6cf5bf-b3ab-4011-96b8-a8c83b5c4a15">
+  <Add OfficeClientEdition="64" Channel="PerpetualVL2021">
+    <Product ID="ProPlus2021Volume" PIDKEY="CBBTN-BRFYH-PRX2Q-XBQCQ-7VC89">
+      <Language ID="fr-fr" />
+      <Language ID="en-us" />
+      <ExcludeApp ID="Lync" />
+    </Product>
+  </Add>
+  <Property Name="SharedComputerLicensing" Value="0" />
+  <Property Name="FORCEAPPSHUTDOWN" Value="FALSE" />
+  <Property Name="DeviceBasedLicensing" Value="0" />
+  <Property Name="SCLCacheOverride" Value="0" />
+  <Property Name="AUTOACTIVATE" Value="1" />
+  <Updates Enabled="TRUE" />
+  <RemoveMSI />
+  <AppSettings>
+    <Setup Name="Company" Value="ACGSIM" />
+  </AppSettings>
+</Configuration>

@@ -1,0 +1,43 @@
+---
+- name: Get SN Machine
+  hosts: host
+  tasks:
+
+    - name: Get the currently logged in user
+      win_shell: |
+        (Get-WmiObject -Class Win32_ComputerSystem).UserName
+      register: logged_in_user
+
+    - name: Show the logged-in user
+      debug:
+        msg: "Logged in user: {{ logged_in_user.stdout | trim }}"
+
+
+    - name: Get CPU Of Machine
+      win_shell: |
+        Get-WmiObject Win32_Processor | Select-Object -ExpandProperty Name
+
+      register: cpu_info
+
+    - name: Show CPU Of Machine
+      debug:
+        msg: "CPU: {{ cpu_info.stdout | trim }}"
+
+    - name: Get RAM Of Machine
+      win_shell: |
+        (Get-CimInstance Win32_PhysicalMemory | Measure-Object -Property capacity -Sum).sum /1gb
+      register: ram
+
+    - name: Show RAM Of Machine
+      debug:
+        msg: "RAM: {{ ram.stdout | trim }} GB"
+
+
+    - name: Show Serial Number Of Machine
+      win_shell: |
+        wmic bios get serialnumber
+      register: logged_in_user
+
+    - name: Show the logged-in user
+      debug:
+        msg: "S/N: {{ logged_in_user.stdout | trim }}"

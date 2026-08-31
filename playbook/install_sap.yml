@@ -1,0 +1,17 @@
+- name: Install SAP Front End Installer
+  hosts: host
+  gather_facts: yes
+  tasks:
+    - name: Copy SAP Front End Installer to remote machine
+      win_copy:
+        src: 'Win64' # Path on the Ansible control machine
+        dest: C:\ # Destination path on the Windows machine
+
+    - name: Run SAP Front End Installer silently
+      win_shell: |
+        Start-Process "C:\Win64\Setup\NwSapSetup.exe" -ArgumentList '/all /silent /install /noRestart' -Wait
+      register: install_output
+
+
+
+

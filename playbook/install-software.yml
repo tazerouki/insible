@@ -1,0 +1,24 @@
+---
+- name: Install UltraVNC on Windows machine using msiexec
+  hosts: host
+  tasks:
+
+    - name: 'Copy installer to local C: drive'
+      win_copy:
+        src: 'UltraVNC_1436_X64.msi'  # Path on the controller
+        dest: 'C:/UltraVNC_1436_X64.msi'  # Destination on the remote machine
+
+    - name: Run UltraVNC installer with custom parameters
+      win_shell: |
+        msiexec /i "C:\UltraVNC_1436_X64.msi" SERVERVIEWER=1 SERVICE=1 PASSWORD="1234" /qn
+      args:
+        executable: cmd
+
+    - name: Get the currently logged in user
+      win_shell: |
+        (Get-WmiObject -Class Win32_ComputerSystem).UserName
+      register: logged_in_user
+
+    - name: Show the logged-in user
+      debug:
+        msg: "Logged in user: {{ logged_in_user.stdout }}"

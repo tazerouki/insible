@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Landscape updated="2024-10-23T08:40:30Z" version="1" generator="SAP GUI for Windows v7700.1.2.155">
+  <Includes>
+    <Include url="file://{{ user_profile.stdout }}\\AppData\\Roaming\\SAP\\Common\\SAPUILandscapeGlobal.xml" index="0" description="SAP reserved"/>
+  </Includes>
+  <Workspaces>
+<Workspace uuid="5d9d29d8-a835-4c7f-9e86-787ad4632f4e" name="QAS">
+<Item uuid="98eba1f0-b5ad-468a-ac04-017c8bfbada1" serviceid="32611b3a-5d69-486b-8281-92e1d36f1ac3"/>
+</Workspace>
+<Workspace uuid="90fbd1c7-9f24-4346-8cc1-0073225fb77f" name="PROD">
+<Item uuid="51a36c57-bf73-4a69-8162-00b52493e9fd" serviceid="451221b6-f76c-41cf-b867-662d4c905b23"/>
+</Workspace>
+  </Workspaces>
+  <Services>
+    <Service type="SAPGUI" uuid="32611b3a-5d69-486b-8281-92e1d36f1ac3" name="QAS SIM" systemid="SMQ" mode="1" server="192.168.10.243:3201" sncop="-1" dcpg="2"/>
+    <Service type="SAPGUI" uuid="451221b6-f76c-41cf-b867-662d4c905b23" name="PRD SIM" systemid="SMP" mode="1" server="192.168.10.246:3201" sncop="-1" dcpg="2"/>
+  </Services>
+</Landscape>

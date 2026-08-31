@@ -1,0 +1,32 @@
+---
+- name: Get currently logged in user on Windows machine
+  hosts: host
+  tasks:
+    - name: Get the currently logged in user without the domain
+      win_shell: |
+        $username = (Get-WmiObject -Class Win32_ComputerSystem).UserName
+        $username.Split([System.IO.Path]::DirectorySeparatorChar)[1].Trim()
+      register: user_profile
+
+    - name: Show MAC address
+      debug:
+        msg: "User is: {{ user_profile.stdout   }}"
+
+    - name: Ensure SAP Logon directory exists
+      win_file:
+        path: "C:\\Users\\{{ user_profile.stdout | trim }}\\AppData\\Roaming\\SAP\\Common"
+        state: directory
+
+    - name: Delete a specific file
+      win_shell: |
+        Remove-Item -Path "C:\Users\{{ user_profile.stdout | trim }}\AppData\Roaming\SAP\Common\SAPUILandscape.xml" -Force
+      register: delete_result
+
+    - name: Show deletion result
+      debug:
+        msg: "File deletion status: {{ delete_result.stdout }}"
+        
+    - name: Deploy customized SAPUILandscape.xml from template
+      win_template:
+        src: "SAPUILandscape.xml.j2"
+        dest: "C:\\Users\\{{ user_profile.stdout | trim }}\\AppData\\Roaming\\SAP\\Common\\SAPUILandscape.xml"

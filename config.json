@@ -1,0 +1,13 @@
+{
+ 	"mysql": {
+ 		"host": "127.0.0.1:3306",
+ 		"user": "root",
+ 		"pass": "123456",
+ 		"name": "semaphore"
+ 	},
+ 	"dialect": "mysql",
+ 	"tmp_path": "/home/ansibe/ansible/playbook",
+ 	"cookie_hash": "4WDxHTt/QZbYnBUrjW+rhCtt8Zr9Tz6r0TFteZ5wJdg=",
+ 	"cookie_encryption": "hTjSJ810DWNc6e8AskfWyD0xzTIVwy6SYJGwUl581m4=",
+ 	"access_key_encryption": "6B9z98UXiAQPsAGvAQcalVomJti0RXQiOkWS6Do05yE="
+ }

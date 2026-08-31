@@ -1,0 +1,14 @@
+- name: Uninstall SAP 770 Final Release
+  hosts: host
+  tasks:
+    - name: Run SAP Uninstaller
+      win_command: '"C:\Program Files (x86)\SAP\SapSetup\Setup\NwSapSetup.exe" /all /Silent /Uninstall'
+      register: uninstall_result
+
+    - name: Check uninstallation result
+      debug:
+        var: uninstall_result.stdout
+
+    - name: Check for any errors
+      debug:
+        var: uninstall_result.stderr

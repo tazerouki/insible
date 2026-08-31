@@ -1,0 +1,26 @@
+---
+- name: Install UltraVNC on Windows machine using msiexec
+  hosts: host
+  tasks:
+    - name: 'Copy installer to local C: drive'
+      win_copy:
+        src: 'LiteManager Pro - Server.msi'  # Path on the Ansible control machine
+        dest: 'C:/LiteManagerProServer.msi'  # Simplified destination on the Windows machine
+
+    - name: Run LiteManager Pro installer with custom parameters
+      win_shell: |
+        msiexec /i "C:\LiteManagerProServer.msi" /qn
+      args:
+        executable: cmd
+      register: install_result
+
+    - name: config Password
+      win_shell: |
+        "C:\Program Files (x86)\LiteManager Pro - Server\ROMServer.exe" /PASSWORD:12345678
+      args:
+        executable: cmd
+      register: install_result
+
+    - name: Display installation result
+      debug:
+        var: install_result.stdout
